@@ -4,13 +4,17 @@ import org.junit.jupiter.api.Test;
 public class MommifierTest {
     //aeiou
     public String transform(String input){
+        StringBuffer result = new StringBuffer().append(input);
         if (input.isEmpty()){
             return null;
         }
-        if (input.matches("a")){
-            return "mommy";
+        for (int i = 0; i <input.length(); i++) {
+            if (input.charAt(i) == 'a'){
+                result.replace(i,i+1,"mommy");
+            }
         }
-        return input ;
+        System.out.println(result);
+        return result.toString() ;
 
     }
     @Test
@@ -31,6 +35,9 @@ public class MommifierTest {
         Assertions.assertEquals("mommy",transform(input));
     }
 
-
-
+    @Test
+    void should_return_transform_if_input_less_than_30present() {
+        String input = "abbbb";
+        Assertions.assertEquals("mommybbbb",transform(input));
+    }
 }
